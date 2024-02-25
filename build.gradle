@@ -1,0 +1,88 @@
+// if we want to give tasks for java projects
+plugins{
+    id 'java'
+    id('application')
+}
+// another way to add java plugin
+//apply plugin:'java'
+
+//add version number to jar
+version='1.0'
+
+//after adding application plugin we need this line else error 'No main class specified and classpath is not an executable jar.'
+mainClassName = 'com.sahil.Main'
+
+//to make jar executable directly so it runs main method directly
+jar {
+    manifest {
+        attributes 'Main-Class':'com.sahil.Main'
+    }
+}
+
+task useGradleWrapper(type:Wrapper)
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    // https://mvnrepository.com/artifact/junit/junit
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+
+    // https://mvnrepository.com/artifact/org.json/json
+    implementation group: 'org.json', name: 'json', version: '20231013'
+
+}
+
+// different ways to write tasks, if no body given then gradle t1 will run nothing
+task "t1"
+task("t2")
+task t3
+
+//to define tasks
+task firstTask{
+    println("Groovy Language!!")
+    //builtin for last
+    doLast {
+        println("Last task to be executed")
+    }
+}
+
+t1 {
+    println("Task t1 actions defined here...")
+    doLast {
+        println("Do Last t1")
+    }
+}
+
+t2 {
+    // this will be executed even when we run gradle t1 since this is not in doLast method & is configured by default.
+    println("Task t2 actions defined here...")
+    doLast {
+        println("Do Last t2")
+    }
+}
+
+t3 {
+    doLast{
+        println("Do Last t3")
+    }
+}
+
+task wearSocks{
+    doLast {
+        println("Do Last wear socks")
+    }
+}
+
+task wearShoes{
+    dependsOn t3, wearSocks //order here doesn't matter, whichever defined first in file will run
+    doLast {
+        println("Do Last wear shoes")
+    }
+}
+
+// another way to define depdenency
+wearShoes.dependsOn wearSocks
+
+// if we run just "gradle " then default task will run
+defaultTasks "t1"

@@ -10,12 +10,19 @@ Learn Gradle and to understand difference between Maven and Gradle
 ## Gradle Commands in terminal E:\java_projects\gradle-demo>
 1. gradle wrapper  -> to generate gradle folder, gradlew gradlew.bat
 2. "./gradlew run" or "gradlew run" in windows - if we share project to another & don't have gradle installed. to build use "./gradlew build"
-3. gradle task --all -> show all tasks
-4. gradle taskName -> to run task
-5. apply plugin:'java' -> to add java plugin
-6. gradle build -> build folder & builds project
-7. gradle run --args="add 4 6" or ./gradlew :cmd-line-args:run --args="add 5 7"
+3. ./gradlew jar
+4. gradle task --all -> show all tasks
+5. gradle taskName -> to run task
+6. apply plugin:'java' -> to add java plugin
+7. gradle build -> build folder & builds project
+8. gradle run --args="add 4 6" or ./gradlew :cmd-line-args:run --args="add 5 7"
+9. ./gradlew javaDocs -> then run "open build/docs/javadoc/index.html to open javadocs
 
+## Other Imp Commands
+1. ./gradlew compileJava/compileTestJava --console=verbose : compile src/main/java code into build/classes dir
+2. ./gradlew processResources --console=verbose : copy src/main/resources to build directory
+3. ./gradlew classes --console=verbose : to do above 2 cmds together, verbose is for more info in console
+4. ./gradlew test: then check build/reports/tests/test/index.html
 All gradle files will be there in users>.gradle>
 
 ### If IntelliJ not able to do code completion, or after you create a empty repo do 1st step

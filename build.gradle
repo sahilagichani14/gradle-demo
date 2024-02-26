@@ -6,17 +6,30 @@ plugins{
 // another way to add java plugin
 //apply plugin:'java'
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+compileJava{
+    options.compilerArgs << '-Werror' //this will stop compile if error occurs
+}
+
 //add version number to jar
-version='1.0'
+version='1.0.0'
 
 //after adding application plugin we need this line else error 'No main class specified and classpath is not an executable jar.'
 mainClassName = 'com.sahil.Main'
 
 //to make jar executable directly so it runs main method directly
 jar {
+    archiveBaseName = 'nameOfJar'
     manifest {
         attributes 'Main-Class':'com.sahil.Main'
     }
+}
+
+javadoc{
+    options.header = 'Give JavaDoc Heading in build/docs/javadoc/index.html' page
 }
 
 task useGradleWrapper(type:Wrapper)
@@ -30,7 +43,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.json/json
     implementation group: 'org.json', name: 'json', version: '20231013'
-
 }
 
 // different ways to write tasks, if no body given then gradle t1 will run nothing
